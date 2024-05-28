@@ -1,0 +1,12 @@
+server:
+  port: 2222
+  servlet:
+    contextPath: /consume  
+spring:
+  config:
+    import: classpath:error-message.yml
+  
+kafka:
+  bootstrap-servers: 192.168.50.119:9092
+  wikimedia-topic: wikimedia.recentchange
+    

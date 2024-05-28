@@ -1,0 +1,4 @@
+errors:
+  conversion-json:
+    code: "code_0001"
+    message: "Error while converting DTO to JSON"

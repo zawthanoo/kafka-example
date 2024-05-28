@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss a} %-5level %logger{36} - %msg%n" />
+            
+        </Console>
+		<Kafka name="Kafka" topic="log4j-test">
+      		<JsonTemplateLayout eventTemplateUri="classpath:EcsLayout.json">
+				<EventTemplateAdditionalField key="correlationId" format="string" value="$${ctx:correlationId}"/>				
+				<EventTemplateAdditionalField key="service" format="string" value="$${ctx:service}"/>
+				<EventTemplateAdditionalField key="initrator" format="string" value="$${ctx:initrator}"/>
+			</JsonTemplateLayout>
+        	<Property name="bootstrap.servers">192.168.50.119:9092</Property>
+    	</Kafka>        
+    </Appenders>
+ 
+    <Loggers>
+        <Root name="org.spring" level="error">
+        	<AppenderRef ref="Console"/>
+        </Root>
+        <Logger name="com.mutu.spring" level="debug" additivity="false">
+        	<AppenderRef ref="Kafka"/>
+        	<AppenderRef ref="Console"/>
+        </Logger>
+    </Loggers>
+</Configuration>
